@@ -1,0 +1,45 @@
+<div class="page-header" align="center">
+	<h3> <%= nombre%> Producto</h3>
+</div>
+<%= form_for(@producto, html: {class: "form-horizontal"}) do |f| %>
+	<div class="form-group">
+		<label class="control-label col-sm-1" for="nombre">Nombre:</label>
+		<div class="col-sm-5">
+			<%= f.text_field :nombre, placeholder: "Nombre del producto", class: "form-control"%>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-1" for="marca">Marca:</label>
+		<div class="col-sm-5">
+			<%= f.select :marca, options_for_select(Marca.all.map{ |c| [c.nombre, c.id]}, @producto.marca), {:include_blank => 'Seleccione una marca'}, { :class => 'form-control' } %>
+
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-1" for="descripcion">Descripción:</label>
+		<div class="col-sm-5">
+			<%= f.text_area :descripcion, placeholder: "Descripción del producto", class: "form-control", cols: "30", rows: "10"%>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-1" for="descripcion">Precio:</label>
+		<div class="col-sm-5">
+			<%= f.number_field :precio, placeholder: "Precio del producto", class: "form-control", :step => 0.01 %>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-12" align="right">
+      		<%= f.submit "Guardar", class:"btn btn-primary"%>
+      		<%= link_to "Volver", { :controller => :productos, :action => :index }, class:"btn btn-primary"%>
+      	</div>
+    </div>
+    <div class="form-group">
+    	<div class="col-sm-12">
+		    <% @producto.errors.full_messages.each do |message|%>
+				<div class="alert alert-danger">
+				  <strong>¡Error!</strong> <%= message%>
+				</div>
+		    <%end%>
+		</div>
+	</div>
+<%end%>

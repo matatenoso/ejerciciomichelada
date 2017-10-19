@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi primer RoR</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
+  <body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <%= link_to "@dgarcia", { :controller => :inicio, :action => :index }, class:"navbar-brand"%>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="<%= 'active' if current_page? controller: :marcas, action: :index %>">
+	      	<%= link_to "Marcas", { :controller => :marcas, :action => :index }%>
+	      </li>
+	      <li class="<%= 'active' if current_page? controller: :productos, action: :index %>">
+	      	<%= link_to "Productos", { :controller => :productos, :action => :index }%>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<div class="container">
+    	<%= yield %>
+	</div>
+	<footer class="footer">
+      <div align="center" class="container">
+        <span class="text-muted">Versió 0.0.1</span>
+      </div>
+    </footer>
+  </body>
+</html>

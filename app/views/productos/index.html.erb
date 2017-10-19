@@ -1,0 +1,43 @@
+<div class="page-header">
+	<h3 align="center"> Consultar Productos</h3>
+</div>
+<div align="right">
+	<%= link_to "Crear Producto", { :controller => :productos, :action => :new }, {class:"btn btn-primary"}%>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Marca</th>
+			<th>Descripción</th>
+			<th>Precio</th>
+			<th class="text-center"><b>Acciones</b></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @productos.each do |producto|%>
+			<tr>
+				<td>
+					<%= producto.nombre %>
+				</td>
+				<td>
+					<%= Marca.find(producto.marca).nombre %>
+				</td>
+				<td>
+					<%= producto.descripcion %>
+				</td>
+				<td>
+					$ <%= producto.precio %>
+				</td>
+				<td class="text-center">
+					<%= link_to edit_producto_path(Producto.find(producto.id)), class:"btn btn-small btn-primary" do %>
+					    <span class="glyphicon glyphicon-pencil"></span>
+					<% end %>
+					<%= link_to producto, method: :delete, data:{confirm:"¿Desea eliminar el producto?"}, class:"btn btn-small btn-danger" do %>
+					    <span class="glyphicon glyphicon-trash"></span>
+					<% end %>
+				</td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>

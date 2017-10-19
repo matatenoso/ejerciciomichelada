@@ -1,0 +1,31 @@
+<div class="page-header">
+	<h3 align="center"> Consultar Marcas</h3>
+</div>
+<div align="right">
+	<%= link_to "Crear Marca", { :controller => :marcas, :action => :new }, {class:"btn btn-primary"}%>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Marca</th>
+			<th class="text-center"><b>Acciones</b></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @marcas.each do |marca|%>
+			<tr>
+				<td>
+					<%= marca.nombre %>
+				</td>
+				<td class="text-center">
+					<%= link_to edit_marca_path(Marca.find(marca.id)), class:"btn btn-small btn-primary" do %>
+					    <span class="glyphicon glyphicon-pencil"></span>
+					<% end %>
+					<%= link_to marca, method: :delete, data:{confirm:"¿Desea eliminar la marca?"}, class:"btn btn-small btn-danger" do %>
+					    <span class="glyphicon glyphicon-trash"></span>
+					<% end %>
+				</td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
